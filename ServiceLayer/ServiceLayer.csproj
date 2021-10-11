@@ -8,4 +8,9 @@
     <ProjectReference Include="..\Datalayer\Datalayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Customer\" />
+    <Folder Include="Order\" />
+  </ItemGroup>
+
 </Project>
