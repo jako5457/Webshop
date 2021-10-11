@@ -17,6 +17,16 @@ namespace Datalayer
 
         public DbSet<Manufacturer> Manufacturers { get; set; }
 
+        public AppContext() : base(new DbContextOptionsBuilder().Options) { }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder builder)
+        {
+            if (!builder.IsConfigured)
+            {
+                builder.UseSqlServer("Server = (localdb)\\mssqllocaldb; Database = WebShopDb; Trusted_Connection = True;");
+            }
+        }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
 
