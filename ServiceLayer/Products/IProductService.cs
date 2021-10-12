@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace ServiceLayer.Products
 {
-    interface IProductService
+    public interface IProductService
     {
 
         public Task<List<ProductDto>> GetProductsAsync();
+
+        public Task<ProductDto> GetProductAsync(int id);
 
         public Task<List<ProductDto>> GetProductsAsync(int page,int PageSize);
 

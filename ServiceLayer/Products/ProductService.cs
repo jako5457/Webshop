@@ -68,6 +68,14 @@ namespace ServiceLayer.Products
             return await _Context.Products.PageCountAsync(PageSize);
         }
 
+        public Task<ProductDto> GetProductAsync(int id)
+        {
+            return _Context.Products
+                            .Where(p => p.ProductId == id)
+                            .ToDto()
+                            .FirstOrDefaultAsync();
+        }
+
         public async Task<List<ProductDto>> GetProductsAsync()
         {
             return await _Context.Products

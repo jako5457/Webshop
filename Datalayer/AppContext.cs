@@ -19,6 +19,8 @@ namespace Datalayer
 
         public AppContext() : base(new DbContextOptionsBuilder().Options) { }
 
+        public AppContext(DbContextOptions options) : base(options) { }
+
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
             if (!builder.IsConfigured)
