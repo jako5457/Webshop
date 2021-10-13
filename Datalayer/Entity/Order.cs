@@ -14,5 +14,7 @@ namespace Datalayer.Entity
         public int CustomerId { get; set; }
 
         public Customer Customer { get; set; }
+
+        public IEnumerable<ProductOrder> ProductOrders { get; set; }
     }
 }
