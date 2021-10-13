@@ -17,6 +17,8 @@ namespace Datalayer
 
         public DbSet<Manufacturer> Manufacturers { get; set; }
 
+        public DbSet<Location> Locations { get; set; }
+
         public AppContext() : base(new DbContextOptionsBuilder().Options) { }
 
         public AppContext(DbContextOptions options) : base(options) { }

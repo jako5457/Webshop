@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Datalayer.Entity
+namespace ServiceLayer.Dto
 {
-    public class Customer
+    public class CustomerDto
     {
-
         public int CustomerId { get; set; }
 
         public string FirstName { get; set; }
@@ -14,7 +13,5 @@ namespace Datalayer.Entity
         public string LastName { get; set; }
 
         public string Email { get; set; }
-
-        public IEnumerable<CustomerLocation> Locations { get; set; }
     }
 }

@@ -16,19 +16,15 @@ namespace Test
 
         public ProductTest()
         {
-            DefaultServiceProviderFactory factory = new();
-            ServiceCollection services = new();
-
-            services.AddDbContext<Datalayer.AppContext>(option => option.UseInMemoryDatabase("Database"));
-            services.AddScoped<IProductService, ProductService>();
-
-            serviceProvider = factory.CreateServiceProvider(services);
+            serviceProvider = TestDependency.CreateServiceProvider(services => {
+                services.AddScoped<IProductService, ProductService>();
+            });
         }
 
         [Fact]
         public async void GetProducts()
         {
-            CreateDatabase();
+            TestDependency.CreateDatabase(serviceProvider);
             IProductService productService = serviceProvider.GetRequiredService<IProductService>();
 
             var products = await productService.GetProductsAsync();
@@ -43,7 +39,7 @@ namespace Test
         [InlineData(20)]
         public async void FindProduct(int id)
         {
-            CreateDatabase();
+            TestDependency.CreateDatabase(serviceProvider);
             var service = serviceProvider.GetRequiredService<IProductService>();
 
             var product = await service.GetProductAsync(id);
@@ -58,7 +54,7 @@ namespace Test
         [InlineData(6)]
         public async void GetPage(int pagesize)
         {
-            CreateDatabase();
+            TestDependency.CreateDatabase(serviceProvider);
             var service = serviceProvider.GetRequiredService<IProductService>();
 
             var products = await service.GetProductsAsync(1, pagesize);
@@ -76,7 +72,7 @@ namespace Test
             decimal rawcalc = 20 / pagesize;
             int expectedpages = Convert.ToInt32(Math.Ceiling(rawcalc));
 
-            CreateDatabase();
+            TestDependency.CreateDatabase(serviceProvider);
             var service = serviceProvider.GetRequiredService<IProductService>();
 
             int Pages = await service.GetPageCountAsync(pagesize);
@@ -85,7 +81,7 @@ namespace Test
         [Fact]
         public async void CreateProduct()
         {
-            CreateDatabase();
+            TestDependency.CreateDatabase(serviceProvider);
             var service = serviceProvider.GetRequiredService<IProductService>();
             var context = serviceProvider.GetRequiredService<Datalayer.AppContext>();
 
@@ -109,7 +105,7 @@ namespace Test
         [Fact]
         public async void HideProduct()
         {
-            CreateDatabase();
+            TestDependency.CreateDatabase(serviceProvider);
             var service = serviceProvider.GetRequiredService<IProductService>();
             var context = serviceProvider.GetRequiredService<Datalayer.AppContext>();
 
@@ -123,11 +119,6 @@ namespace Test
             Assert.True(product.Hidden);
         }
 
-        private void CreateDatabase()
-        {
-            var context = serviceProvider.GetRequiredService<Datalayer.AppContext>();
-            context.Database.EnsureDeleted();
-            context.Database.EnsureCreated();
-        }
+        
     }
 }

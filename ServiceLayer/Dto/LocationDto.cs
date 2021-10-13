@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Datalayer.Entity
+namespace ServiceLayer.Dto
 {
-    public class Location
+    public class LocationDto
     {
-
         public int LocationId { get; set; }
 
         public string Country { get; set; }
@@ -15,10 +14,6 @@ namespace Datalayer.Entity
 
         public int Zipcode { get; set; }
 
-        public string City { get; set; } 
-
-        public List<CustomerLocation> CustomerLocations { get; set; }
-
-        public List<ManufacturerLocation> ManufacturerLocations { get; set; }
+        public string City { get; set; }
     }
 }
