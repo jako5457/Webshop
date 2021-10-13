@@ -31,6 +31,16 @@ namespace ServiceLayer.Order
                 Customer = customer,
                 ProductOrders = products.Select(p => new Datalayer.Entity.ProductOrder() { ProductId = p.ProductId })
             };
+
+            try
+            {
+                _Context.Orders.Add(newOrder);
+                await _Context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Can't create order",e);
+            }
         }
 
         public async Task<OrderDto> GetOrderAsync(int OrderId)
