@@ -75,5 +75,18 @@ namespace ServiceLayer
         }
 
         #endregion
+
+        #region Manufacturer
+
+        public static IQueryable<ManufacturerDto> ToDto(this IQueryable<Datalayer.Entity.Manufacturer> manufacturers)
+        {
+            return manufacturers.Select(m => new ManufacturerDto()
+            {
+                ManufacturerId = m.ManufacturerId,
+                Name = m.Name
+            });
+        }
+
+        #endregion
     }
 }

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ServiceLayer.Order
 {
-    class OrderService : IOrderService
+    public class OrderService : IOrderService
     {
         public Datalayer.AppContext _Context;
 

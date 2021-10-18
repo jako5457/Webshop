@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ServiceLayer.Order
 {
-    interface IOrderService
+    public interface IOrderService
     {
 
         public Task<OrderDto> GetOrderAsync(int OrderId);

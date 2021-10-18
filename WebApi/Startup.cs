@@ -12,6 +12,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ServiceLayer.Products;
+using ServiceLayer.Customers;
+using ServiceLayer.Order;
 
 namespace WebApi
 {
@@ -33,6 +36,11 @@ namespace WebApi
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApi", Version = "v1" });
             });
+
+            services.AddDbContext<Datalayer.AppContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Webshop")));
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<IOrderService, OrderService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
