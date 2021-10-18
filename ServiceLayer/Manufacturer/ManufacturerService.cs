@@ -19,7 +19,7 @@ namespace ServiceLayer.Manufacturer
             _context = context;
         }
 
-        public async Task CreateManufacturer(string name)
+        public async Task CreateManufacturerAsync(string name)
         {
             var NewManufacturer = new Datalayer.Entity.Manufacturer()
             {
@@ -37,7 +37,7 @@ namespace ServiceLayer.Manufacturer
             }
         }
 
-        public async Task EditManufacturer(ManufacturerDto manufacturer)
+        public async Task EditManufacturerAsync(ManufacturerDto manufacturer)
         {
             Datalayer.Entity.Manufacturer man = await _context.Manufacturers
                                                               .Where(m => m.ManufacturerId == manufacturer.ManufacturerId)
@@ -55,7 +55,7 @@ namespace ServiceLayer.Manufacturer
             }
         }
 
-        public Task<ManufacturerDto> GetManufacturer(int id)
+        public Task<ManufacturerDto> GetManufacturerAsync(int id)
         {
             return _context.Manufacturers
                             .Where(m => m.ManufacturerId == id)

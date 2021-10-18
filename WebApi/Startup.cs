@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using ServiceLayer.Products;
 using ServiceLayer.Customers;
 using ServiceLayer.Order;
+using ServiceLayer.Manufacturer;
 
 namespace WebApi
 {
@@ -41,6 +42,7 @@ namespace WebApi
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IManufacturerService, ManufacturerService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

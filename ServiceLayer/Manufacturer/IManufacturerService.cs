@@ -11,11 +11,11 @@ namespace ServiceLayer.Manufacturer
 
         public Task<List<ManufacturerDto>> GetManufacturersAsync();
 
-        public Task<ManufacturerDto> GetManufacturer(int id);
+        public Task<ManufacturerDto> GetManufacturerAsync(int id);
 
-        public Task CreateManufacturer(string name);
+        public Task CreateManufacturerAsync(string name);
 
-        public Task EditManufacturer(ManufacturerDto manufacturer);
+        public Task EditManufacturerAsync(ManufacturerDto manufacturer);
 
     }
 }

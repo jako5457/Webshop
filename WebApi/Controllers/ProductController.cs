@@ -35,6 +35,35 @@ namespace WebApi.Controllers
             return await _ProductService.GetProductAsync(id);
         }
 
+        [HttpPut]
+        public async Task<IActionResult> EditProduct(ProductDto product)
+        {
+            try
+            {
+                await _ProductService.EditProductAsync(product);
+                return Ok("Product changed");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> DeleteProduct(int id)
+        {
+            try
+            {
+                await _ProductService.SetProductHiddenAsync(id, true);
+                return Ok("Product deleted");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         [HttpGet]
         [Route("page/{Page}/{PageSize}")]
         public async Task<List<ProductDto>> GetPage(int Page,int PageSize)
@@ -64,41 +93,6 @@ namespace WebApi.Controllers
             }
         }
 
-        [HttpPut]
-        [Route("edit/{id}")]
-        public async Task<IActionResult> EditProduct(ProductDto product,int id)
-        {
-            if (product.ProductId == id)
-            {
-                try
-                {
-                    await _ProductService.EditProductAsync(product);
-                    return Ok("Product changed");
-                }
-                catch (Exception e)
-                {
-                    return BadRequest(e.Message);
-                }
-            }
-            else
-            {
-                return BadRequest("Product and id does not match");
-            }
-        }
         
-        [HttpDelete]
-        [Route("delete/{id}")]
-        public async Task<IActionResult> DeleteProduct(int id)
-        {
-            try
-            {
-                await _ProductService.SetProductHiddenAsync(id, true);
-                return Ok("Product deleted");
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-        }
     }
 }
