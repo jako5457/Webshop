@@ -21,5 +21,7 @@ namespace Datalayer.Entity
         public Manufacturer Manufacturer { get; set; }
 
         public IEnumerable<ProductImage> ProductImages { get; set; }
+
+        public IEnumerable<ProductOrder> ProductOrders { get; set; }
     }
 }

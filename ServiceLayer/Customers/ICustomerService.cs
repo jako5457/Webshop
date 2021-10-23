@@ -23,6 +23,6 @@ namespace ServiceLayer.Customers
 
         public Task<List<LocationDto>> GetCustomerLocationsAsync(int CustomerId);
 
-
+        public Task<CustomerDto> GetCustomerByEmailAsync(string email);
     }
 }

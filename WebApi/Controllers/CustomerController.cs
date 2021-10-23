@@ -21,6 +21,10 @@ namespace WebApi.Controllers
             _customerService = customerService;
         }
 
+        #region Customer
+
+        #region GET
+
         [HttpGet]
         [Route("all")]
         public async Task<List<CustomerDto>> GetAllCustomers()
@@ -35,19 +39,36 @@ namespace WebApi.Controllers
             return await _customerService.GetCustomerAsync(CustomerId);
         }
 
+        [HttpGet]
+        [Route("email/{Email}")]
+        public async Task<CustomerDto> GetCustomer(string Email)
+        {
+            return await _customerService.GetCustomerByEmailAsync(Email);
+        }
+
+        #endregion
+
+        #region POST
+
         [HttpPost]
         public async Task<IActionResult> CreateCustomer(CustomerDto customer)
         {
             try
             {
                 await _customerService.CreateCustomerAsync(customer);
-                return Ok("Customer created");
+                var cust = await _customerService.GetCustomerByEmailAsync(customer.Email);
+                return Ok(cust);
             }
             catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
         }
+
+
+        #endregion
+
+        #region PUT
 
         [HttpPut]
         public async Task<IActionResult> EditCustomer(CustomerDto customer)
@@ -63,6 +84,10 @@ namespace WebApi.Controllers
             }
         }
 
+        #endregion
+
+        #region DELETE
+
         [HttpDelete]
         public async Task<IActionResult> RemoveCustomer(int CustomerId)
         {
@@ -76,5 +101,35 @@ namespace WebApi.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        #endregion
+
+        #endregion
+
+        #region Locations
+
+        [HttpPost]
+        [Route("location/{CustomerId}")]
+        public async Task<IActionResult> AddCustomerLocation(int customerId,LocationDto location)
+        {
+            try
+            {
+                await _customerService.CreateCustomerLocationAsync(customerId, location);
+                return Ok("Location Created");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("location/{CustomerId}")]
+        public async Task<List<LocationDto>> GetCustomerLocations(int CustomerId)
+        {
+            return await _customerService.GetCustomerLocationsAsync(CustomerId);
+        }
+
+        #endregion
     }
 }

@@ -11,10 +11,12 @@ namespace ServiceLayer.Order
 
         public Task<OrderDto> GetOrderAsync(int OrderId);
 
-        public Task<List<OrderDto>> GetOrders();
+        public Task<List<OrderDto>> GetOrdersAsync();
 
-        public Task<List<OrderDto>> GetOrders(int CustomerId);
+        public Task<List<OrderDto>> GetOrdersAsync(int CustomerId);
 
-        public Task CreateOrderAsync(OrderDto order,List<ProductDto> products);
+        public Task CreateOrderAsync(OrderDto order,List<OrderProductDto> products);
+
+        public Task<List<OrderProductDto>> GetOrderProductsAsync(int orderId);
     }
 }

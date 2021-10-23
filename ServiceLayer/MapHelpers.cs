@@ -24,6 +24,22 @@ namespace ServiceLayer
                        });
         }
 
+        public static IQueryable<OrderProductDto> ToDto(this IQueryable<Datalayer.Entity.Product> products,int orderId)
+        {
+            return products
+                      .Include(p => p.Manufacturer)
+                      .Select(p => new OrderProductDto()
+                      {
+                          ProductId = p.ProductId,
+                          Name = p.Name,
+                          Description = p.Description,
+                          ManufacturerName = p.Manufacturer.Name,
+                          Price = p.Price,
+                          ManufacturerId = p.ManufacturerId,
+                          Amount = p.ProductOrders.Where(o => o.OrderId == orderId).Select(o => o.Amount).FirstOrDefault()
+                      });
+        }
+
         #endregion
 
         #region Customer

@@ -122,5 +122,13 @@ namespace ServiceLayer.Customers
                 throw new Exception("Can't edit Customer",e);
             }
         }
+
+        public async Task<CustomerDto> GetCustomerByEmailAsync(string email)
+        {
+            return await _context.Customers
+                                    .Where(c => c.Email == email)
+                                    .ToDto()
+                                    .FirstOrDefaultAsync();
+        }
     }
 }

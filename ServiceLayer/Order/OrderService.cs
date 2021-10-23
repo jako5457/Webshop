@@ -17,7 +17,7 @@ namespace ServiceLayer.Order
             _Context = context;
         }
 
-        public async Task CreateOrderAsync(OrderDto order,List<ProductDto> products)
+        public async Task CreateOrderAsync(OrderDto order,List<OrderProductDto> products)
         {
 
             var customer = await _Context.Customers
@@ -29,7 +29,10 @@ namespace ServiceLayer.Order
                 CustomerId = order.CustomerId,
                 TotalPrice = products.Select(p => p.Price).Sum(),
                 Customer = customer,
-                ProductOrders = products.Select(p => new Datalayer.Entity.ProductOrder() { ProductId = p.ProductId })
+                ProductOrders = products.Select(p => new Datalayer.Entity.ProductOrder() {
+                    ProductId = p.ProductId, 
+                    Amount = p.Amount 
+                }).ToList(),
             };
 
             try
@@ -51,12 +54,20 @@ namespace ServiceLayer.Order
                             .FirstOrDefaultAsync();
         }
 
-        public Task<List<OrderDto>> GetOrders()
+        public async Task<List<OrderProductDto>> GetOrderProductsAsync(int orderId)
+        {
+            return await _Context.Products
+                                    .Where(O => O.ProductOrders.Where(po => po.OrderId == orderId).Any())
+                                    .ToDto(orderId)
+                                    .ToListAsync();
+        }
+
+        public Task<List<OrderDto>> GetOrdersAsync()
         {
             return _Context.Orders.ToDto().ToListAsync();
         }
 
-        public async Task<List<OrderDto>> GetOrders(int CustomerId)
+        public async Task<List<OrderDto>> GetOrdersAsync(int CustomerId)
         {
             return await _Context.Orders
                             .Where(o => o.CustomerId == CustomerId)

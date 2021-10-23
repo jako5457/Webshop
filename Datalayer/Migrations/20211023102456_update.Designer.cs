@@ -3,14 +3,16 @@ using Datalayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Datalayer.Migrations
 {
     [DbContext(typeof(AppContext))]
-    partial class AppContextModelSnapshot : ModelSnapshot
+    [Migration("20211023102456_update")]
+    partial class update
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -237,8 +239,8 @@ namespace Datalayer.Migrations
                             Description = "This product is an Awesome piece of craftsmanship",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product2026",
-                            Price = 0.96761751871910762
+                            Name = "Product8082",
+                            Price = 0.034710444060485082
                         },
                         new
                         {
@@ -246,8 +248,8 @@ namespace Datalayer.Migrations
                             Description = "This product is an Awesome piece of craftsmanship",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product5064",
-                            Price = 0.098140941512836588
+                            Name = "Product4856",
+                            Price = 0.82663812480244703
                         },
                         new
                         {
@@ -255,8 +257,8 @@ namespace Datalayer.Migrations
                             Description = "This product is an Awesome piece of craftsmanship",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product6994",
-                            Price = 0.33072846631087754
+                            Name = "Product5682",
+                            Price = 0.51493160729991816
                         },
                         new
                         {
@@ -264,8 +266,8 @@ namespace Datalayer.Migrations
                             Description = "This product is an Awesome piece of craftsmanship",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product6671",
-                            Price = 0.98885444225224406
+                            Name = "Product5178",
+                            Price = 0.73101369651547343
                         },
                         new
                         {
@@ -273,8 +275,8 @@ namespace Datalayer.Migrations
                             Description = "This product is an Awesome piece of craftsmanship",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product6650",
-                            Price = 0.21303140149127292
+                            Name = "Product9878",
+                            Price = 0.085239692165162265
                         },
                         new
                         {
@@ -282,8 +284,8 @@ namespace Datalayer.Migrations
                             Description = "This product is an Awesome piece of craftsmanship",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product4344",
-                            Price = 0.10333153843103514
+                            Name = "Product8210",
+                            Price = 0.30331603125823475
                         },
                         new
                         {
@@ -291,8 +293,8 @@ namespace Datalayer.Migrations
                             Description = "This product is an Awesome piece of craftsmanship",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product6931",
-                            Price = 0.02461951366840839
+                            Name = "Product7107",
+                            Price = 0.0031924834489787386
                         },
                         new
                         {
@@ -300,8 +302,8 @@ namespace Datalayer.Migrations
                             Description = "This product is an Awesome piece of craftsmanship",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product8064",
-                            Price = 0.7403624703829933
+                            Name = "Product6297",
+                            Price = 0.99779556458713281
                         },
                         new
                         {
@@ -309,8 +311,8 @@ namespace Datalayer.Migrations
                             Description = "This product is an Awesome piece of craftsmanship",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product9793",
-                            Price = 0.35495251340556538
+                            Name = "Product5274",
+                            Price = 0.61210196400624794
                         },
                         new
                         {
@@ -318,8 +320,8 @@ namespace Datalayer.Migrations
                             Description = "This product is an Awesome piece of craftsmanship",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product3178",
-                            Price = 0.93979807288376527
+                            Name = "Product8055",
+                            Price = 0.72831812907397664
                         },
                         new
                         {
@@ -327,8 +329,8 @@ namespace Datalayer.Migrations
                             Description = "This product is an Awesome piece of craftsmanship",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product4864",
-                            Price = 0.013716898399273352
+                            Name = "Product9590",
+                            Price = 0.84423231978166491
                         },
                         new
                         {
@@ -336,8 +338,8 @@ namespace Datalayer.Migrations
                             Description = "This product is an Awesome piece of craftsmanship",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product5319",
-                            Price = 0.55084223325869175
+                            Name = "Product6207",
+                            Price = 0.069197982116228893
                         },
                         new
                         {
@@ -345,8 +347,8 @@ namespace Datalayer.Migrations
                             Description = "This product is an Awesome piece of craftsmanship",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product4775",
-                            Price = 0.8198520470503029
+                            Name = "Product1516",
+                            Price = 0.23382461780394642
                         },
                         new
                         {
@@ -354,8 +356,8 @@ namespace Datalayer.Migrations
                             Description = "This product is an Awesome piece of craftsmanship",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product8128",
-                            Price = 0.32081744182892957
+                            Name = "Product5807",
+                            Price = 0.64738977777184448
                         },
                         new
                         {
@@ -363,8 +365,8 @@ namespace Datalayer.Migrations
                             Description = "This product is an Awesome piece of craftsmanship",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product2143",
-                            Price = 0.41212658603309027
+                            Name = "Product1235",
+                            Price = 0.69891968867691223
                         },
                         new
                         {
@@ -372,8 +374,8 @@ namespace Datalayer.Migrations
                             Description = "This product is an Awesome piece of craftsmanship",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product3555",
-                            Price = 0.87413053627783921
+                            Name = "Product8877",
+                            Price = 0.96120600214284191
                         },
                         new
                         {
@@ -381,8 +383,8 @@ namespace Datalayer.Migrations
                             Description = "This product is an Awesome piece of craftsmanship",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product2947",
-                            Price = 0.65551696934528503
+                            Name = "Product7301",
+                            Price = 0.30577615942143654
                         },
                         new
                         {
@@ -390,8 +392,8 @@ namespace Datalayer.Migrations
                             Description = "This product is an Awesome piece of craftsmanship",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product8715",
-                            Price = 0.33351630872744897
+                            Name = "Product1379",
+                            Price = 0.067224734494101601
                         },
                         new
                         {
@@ -399,8 +401,8 @@ namespace Datalayer.Migrations
                             Description = "This product is an Awesome piece of craftsmanship",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product6994",
-                            Price = 0.084723982068115836
+                            Name = "Product5034",
+                            Price = 0.84203974383046842
                         },
                         new
                         {
@@ -408,8 +410,8 @@ namespace Datalayer.Migrations
                             Description = "This product is an Awesome piece of craftsmanship",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product3045",
-                            Price = 0.68084528515154741
+                            Name = "Product1332",
+                            Price = 0.80672409935236167
                         });
                 });
 
@@ -444,9 +446,6 @@ namespace Datalayer.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Amount")
-                        .HasColumnType("int");
-
                     b.HasKey("OrderId", "ProductId");
 
                     b.HasIndex("ProductId");
@@ -457,8 +456,7 @@ namespace Datalayer.Migrations
                         new
                         {
                             OrderId = 1,
-                            ProductId = 15,
-                            Amount = 0
+                            ProductId = 5
                         });
                 });
 
@@ -542,7 +540,7 @@ namespace Datalayer.Migrations
                         .IsRequired();
 
                     b.HasOne("Datalayer.Entity.Product", "Product")
-                        .WithMany("ProductOrders")
+                        .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -579,8 +577,6 @@ namespace Datalayer.Migrations
             modelBuilder.Entity("Datalayer.Entity.Product", b =>
                 {
                     b.Navigation("ProductImages");
-
-                    b.Navigation("ProductOrders");
                 });
 #pragma warning restore 612, 618
         }
