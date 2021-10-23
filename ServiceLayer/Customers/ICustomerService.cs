@@ -17,6 +17,8 @@ namespace ServiceLayer.Customers
 
         public Task RemoveCustomerAsync(int CustomerId);
 
+        public Task EditCustomerAsync(CustomerDto customer);
+
         public Task CreateCustomerLocationAsync(int CustomerId, LocationDto location);
 
         public Task<List<LocationDto>> GetCustomerLocationsAsync(int CustomerId);

@@ -102,5 +102,25 @@ namespace ServiceLayer.Customers
                 throw new Exception("Can't remove Customer");
             }
         }
+
+        public async Task EditCustomerAsync(CustomerDto customer)
+        {
+            var cust = await _context.Customers
+                                        .Where(c => c.CustomerId == customer.CustomerId)
+                                        .FirstOrDefaultAsync();
+
+            cust.FirstName = customer.FirstName;
+            cust.LastName = customer.LastName;
+            cust.Email = customer.Email;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Can't edit Customer",e);
+            }
+        }
     }
 }
