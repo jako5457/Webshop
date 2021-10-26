@@ -108,5 +108,16 @@ namespace ServiceLayer.Products
                 throw new Exception("Can't hide product",e);
             }
         }
+
+        public async Task<ProductImageDto> GetProductImageAsync(int productId,int ImageNumber)
+        {
+           return await _Context.Products
+                            .Where(p => p.ProductId == productId)
+                            .Select(p => p.ProductImages
+                                            .Skip(ImageNumber - 1)
+                                            .FirstOrDefault())
+                            .ToDto()
+                            .FirstOrDefaultAsync();
+        }
     }
 }

@@ -137,6 +137,19 @@ namespace Datalayer
                 }
             );
 
+            
+
+            for (int i = 1; i < ProductCount + 1; i++)
+            {
+                builder.Entity<ProductImage>().HasData(new ProductImage()
+                {
+                    ProductId = i,
+                    ProductImageId = i,
+                    ImageName = "Image",
+                    ImagePath = "Image.png"
+                });
+            }
+
             builder.Entity<ProductOrder>().HasData(
                 new ProductOrder()
                 {

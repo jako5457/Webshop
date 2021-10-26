@@ -104,5 +104,16 @@ namespace ServiceLayer
         }
 
         #endregion
+
+        public static IQueryable<ProductImageDto> ToDto(this IQueryable<Datalayer.Entity.ProductImage> images)
+        {
+            return images.Select(i => new ProductImageDto()
+            {
+                ImageName = i.ImageName,
+                ImagePath = i.ImagePath,
+                ProductId = i.ProductId,
+                ProductImageId = i.ProductImageId
+            });
+        }
     }
 }
