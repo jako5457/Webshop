@@ -22,7 +22,7 @@ namespace Datalayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Location",
+                name: "Locations",
                 columns: table => new
                 {
                     LocationId = table.Column<int>(type: "int", nullable: false)
@@ -34,7 +34,7 @@ namespace Datalayer.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Location", x => x.LocationId);
+                    table.PrimaryKey("PK_Locations", x => x.LocationId);
                 });
 
             migrationBuilder.CreateTable(
@@ -87,9 +87,9 @@ namespace Datalayer.Migrations
                         principalColumn: "CustomerId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_CustomerLocation_Location_LocationId",
+                        name: "FK_CustomerLocation_Locations_LocationId",
                         column: x => x.LocationId,
-                        principalTable: "Location",
+                        principalTable: "Locations",
                         principalColumn: "LocationId",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -105,9 +105,9 @@ namespace Datalayer.Migrations
                 {
                     table.PrimaryKey("PK_ManufacturerLocation", x => new { x.ManufacturerId, x.LocationId });
                     table.ForeignKey(
-                        name: "FK_ManufacturerLocation_Location_LocationId",
+                        name: "FK_ManufacturerLocation_Locations_LocationId",
                         column: x => x.LocationId,
-                        principalTable: "Location",
+                        principalTable: "Locations",
                         principalColumn: "LocationId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -167,7 +167,8 @@ namespace Datalayer.Migrations
                 columns: table => new
                 {
                     ProductId = table.Column<int>(type: "int", nullable: false),
-                    OrderId = table.Column<int>(type: "int", nullable: false)
+                    OrderId = table.Column<int>(type: "int", nullable: false),
+                    Amount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -192,7 +193,7 @@ namespace Datalayer.Migrations
                 values: new object[] { 1, "Ole@eksample.dk", "Ole", "Sigurd" });
 
             migrationBuilder.InsertData(
-                table: "Location",
+                table: "Locations",
                 columns: new[] { "LocationId", "Address", "City", "Country", "Zipcode" },
                 values: new object[,]
                 {
@@ -207,7 +208,8 @@ namespace Datalayer.Migrations
                 values: new object[,]
                 {
                     { 1, "Euc syd" },
-                    { 2, "Aabenraa makinfabrik" }
+                    { 2, "Aabenraa maskinfabrik" },
+                    { 3, "Raspberrypi.dk" }
                 });
 
             migrationBuilder.InsertData(
@@ -220,8 +222,9 @@ namespace Datalayer.Migrations
                 columns: new[] { "LocationId", "ManufacturerId" },
                 values: new object[,]
                 {
-                    { 2, 2 },
-                    { 1, 1 }
+                    { 2, 3 },
+                    { 1, 1 },
+                    { 2, 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -234,32 +237,70 @@ namespace Datalayer.Migrations
                 columns: new[] { "ProductId", "Description", "Hidden", "ManufacturerId", "Name", "Price" },
                 values: new object[,]
                 {
-                    { 2, "This product is an Awesome piece of craftsmanship", false, 1, "Product8184", 0.82861133004939713 },
-                    { 19, "This product is an Awesome piece of craftsmanship", false, 1, "Product9961", 0.46216725207034837 },
-                    { 18, "This product is an Awesome piece of craftsmanship", false, 1, "Product1441", 0.42984472281757963 },
-                    { 17, "This product is an Awesome piece of craftsmanship", false, 1, "Product8353", 0.21315525714920613 },
-                    { 16, "This product is an Awesome piece of craftsmanship", false, 1, "Product2588", 0.58267959746656917 },
-                    { 15, "This product is an Awesome piece of craftsmanship", false, 1, "Product1510", 0.93296121849350688 },
-                    { 14, "This product is an Awesome piece of craftsmanship", false, 1, "Product4233", 0.89173890458966554 },
-                    { 13, "This product is an Awesome piece of craftsmanship", false, 1, "Product9646", 0.012724678969348166 },
-                    { 12, "This product is an Awesome piece of craftsmanship", false, 1, "Product1041", 0.56402758209222348 },
-                    { 11, "This product is an Awesome piece of craftsmanship", false, 1, "Product2891", 0.12926765630453249 },
-                    { 10, "This product is an Awesome piece of craftsmanship", false, 1, "Product7613", 0.5388925944170414 },
-                    { 20, "This product is an Awesome piece of craftsmanship", false, 1, "Product2766", 0.5853943878716763 },
-                    { 8, "This product is an Awesome piece of craftsmanship", false, 1, "Product1536", 0.94153446654860606 },
-                    { 7, "This product is an Awesome piece of craftsmanship", false, 1, "Product2666", 0.41928267870996272 },
-                    { 6, "This product is an Awesome piece of craftsmanship", false, 1, "Product6680", 0.59594522537474759 },
-                    { 5, "This product is an Awesome piece of craftsmanship", false, 1, "Product9599", 0.05805989450684744 },
-                    { 4, "This product is an Awesome piece of craftsmanship", false, 1, "Product6729", 0.99687428446341042 },
-                    { 3, "This product is an Awesome piece of craftsmanship", false, 1, "Product4594", 0.026904471696775626 },
-                    { 1, "This product is an Awesome piece of craftsmanship", false, 1, "Product4510", 0.13782152772779649 },
-                    { 9, "This product is an Awesome piece of craftsmanship", false, 1, "Product3451", 0.079871053378968992 }
+                    { 3, "This product is 74% better then the original", false, 1, "Raspberry pi 44", 0.6008433716375583 },
+                    { 20, "This product is 10% better then the original", false, 1, "Raspberry pi 17", 0.88460101414686121 },
+                    { 19, "This product is 56% better then the original", false, 1, "Raspberry pi 70", 0.95362494371534556 },
+                    { 18, "This product is 92% better then the original", false, 1, "Raspberry pi 62", 0.38221089978805317 },
+                    { 17, "This product is 84% better then the original", false, 1, "Raspberry pi 68", 0.24547895428048397 },
+                    { 16, "This product is 64% better then the original", false, 1, "Raspberry pi 64", 0.052567358618866356 },
+                    { 15, "This product is 64% better then the original", false, 1, "Raspberry pi 5", 0.26485338120947283 },
+                    { 14, "This product is 35% better then the original", false, 1, "Raspberry pi 93", 0.090230986983622891 },
+                    { 13, "This product is 91% better then the original", false, 1, "Raspberry pi 67", 0.63951263466827224 },
+                    { 12, "This product is 89% better then the original", false, 1, "Raspberry pi 92", 0.9797203410322407 },
+                    { 11, "This product is 16% better then the original", false, 1, "Raspberry pi 99", 0.12596092285865962 },
+                    { 1, "This product is 27% better then the original", false, 1, "Raspberry pi 51", 0.064442106086966627 },
+                    { 9, "This product is 64% better then the original", false, 1, "Raspberry pi 15", 0.20476716067863962 },
+                    { 8, "This product is 39% better then the original", false, 1, "Raspberry pi 50", 0.16150921590696518 },
+                    { 7, "This product is 23% better then the original", false, 1, "Raspberry pi 77", 0.43558739797938029 },
+                    { 6, "This product is 42% better then the original", false, 1, "Raspberry pi 12", 0.95120598746054152 },
+                    { 5, "This product is 19% better then the original", false, 1, "Raspberry pi 9", 0.48301145456871553 },
+                    { 4, "This product is 33% better then the original", false, 1, "Raspberry pi 88", 0.1613166752091221 },
+                    { 2, "This product is 55% better then the original", false, 1, "Raspberry pi 49", 0.19485148703439695 },
+                    { 10, "This product is 70% better then the original", false, 1, "Raspberry pi 24", 0.65246497125013958 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ProductImage",
+                columns: new[] { "ProductImageId", "ImageName", "ImagePath", "ProductId" },
+                values: new object[,]
+                {
+                    { 1, "Pi70", "Pi7.jpg", 1 },
+                    { 29, "Pi47", "Pi6.jpg", 19 },
+                    { 28, "Pi34", "Pi2.jpg", 18 },
+                    { 27, "Pi30", "Pi4.jpg", 17 },
+                    { 26, "Pi98", "Pi1.jpg", 17 },
+                    { 25, "Pi70", "Pi2.jpg", 16 },
+                    { 24, "Pi85", "Pi7.jpg", 16 },
+                    { 23, "Pi18", "Pi4.jpg", 15 },
+                    { 22, "Pi57", "Pi1.jpg", 15 },
+                    { 21, "Pi45", "Pi3.jpg", 14 },
+                    { 20, "Pi97", "Pi5.jpg", 14 },
+                    { 19, "Pi55", "Pi1.jpg", 13 },
+                    { 18, "Pi33", "Pi7.jpg", 12 },
+                    { 17, "Pi1", "Pi6.jpg", 11 },
+                    { 30, "Pi36", "Pi7.jpg", 19 },
+                    { 16, "Pi62", "Pi5.jpg", 11 },
+                    { 14, "Pi71", "Pi7.jpg", 9 },
+                    { 13, "Pi61", "Pi3.jpg", 9 },
+                    { 12, "Pi92", "Pi7.jpg", 8 },
+                    { 11, "Pi38", "Pi7.jpg", 8 },
+                    { 10, "Pi91", "Pi7.jpg", 7 },
+                    { 9, "Pi36", "Pi6.jpg", 7 },
+                    { 8, "Pi9", "Pi4.jpg", 6 },
+                    { 7, "Pi46", "Pi2.jpg", 5 },
+                    { 6, "Pi23", "Pi1.jpg", 4 },
+                    { 5, "Pi16", "Pi5.jpg", 3 },
+                    { 4, "Pi72", "Pi5.jpg", 2 },
+                    { 3, "Pi43", "Pi2.jpg", 2 },
+                    { 2, "Pi58", "Pi1.jpg", 1 },
+                    { 15, "Pi12", "Pi7.jpg", 10 },
+                    { 31, "Pi66", "Pi7.jpg", 20 }
                 });
 
             migrationBuilder.InsertData(
                 table: "ProductOrder",
-                columns: new[] { "OrderId", "ProductId" },
-                values: new object[] { 1, 15 });
+                columns: new[] { "OrderId", "ProductId", "Amount" },
+                values: new object[] { 1, 16, 0 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_CustomerLocation_LocationId",
@@ -307,7 +348,7 @@ namespace Datalayer.Migrations
                 name: "ProductOrder");
 
             migrationBuilder.DropTable(
-                name: "Location");
+                name: "Locations");
 
             migrationBuilder.DropTable(
                 name: "Orders");

@@ -75,7 +75,12 @@ namespace Datalayer
                 new Manufacturer()
                 {
                     ManufacturerId = 2,
-                    Name = "Aabenraa makinfabrik"
+                    Name = "Aabenraa maskinfabrik"
+                },
+                new Manufacturer()
+                {
+                    ManufacturerId = 3,
+                    Name = "Raspberrypi.dk"
                 }
             );
 
@@ -89,6 +94,11 @@ namespace Datalayer
                 {
                     LocationId = 2,
                     ManufacturerId = 2
+                },
+                new ManufacturerLocation()
+                {
+                    LocationId = 2,
+                    ManufacturerId = 3
                 }
             );
 
@@ -119,8 +129,8 @@ namespace Datalayer
                     new Product()
                     {
                         ProductId = i,
-                        Name = $"Product{rnd.Next(1000, 9999)}",
-                        Description = "This product is an Awesome piece of craftsmanship",
+                        Name = $"Raspberry pi {rnd.Next(1,100)}",
+                        Description = $"This product is {rnd.Next(1,100)}% better then the original",
                         Hidden = false,
                         ManufacturerId = rnd.Next(1, 2),
                         Price = rnd.NextDouble()
@@ -136,18 +146,29 @@ namespace Datalayer
                     TotalPrice = 100
                 }
             );
-
-            
-
+            int count = 1;
             for (int i = 1; i < ProductCount + 1; i++)
             {
                 builder.Entity<ProductImage>().HasData(new ProductImage()
                 {
                     ProductId = i,
-                    ProductImageId = i,
-                    ImageName = "Image",
-                    ImagePath = "Image.png"
+                    ProductImageId = count,
+                    ImageName = $"Pi{rnd.Next(1,100)}",
+                    ImagePath = $"Pi{rnd.Next(1,8)}.jpg"
                 });
+                count++;
+
+                if (rnd.Next(0,100) >= 50)
+                {
+                    builder.Entity<ProductImage>().HasData(new ProductImage()
+                    {
+                        ProductId = i,
+                        ProductImageId = count,
+                        ImageName = $"Pi{rnd.Next(1, 100)}",
+                        ImagePath = $"Pi{rnd.Next(1, 8)}.jpg"
+                    });
+                    count++;
+                }
             }
 
             builder.Entity<ProductOrder>().HasData(

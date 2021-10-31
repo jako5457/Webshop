@@ -143,7 +143,12 @@ namespace Datalayer.Migrations
                         new
                         {
                             ManufacturerId = 2,
-                            Name = "Aabenraa makinfabrik"
+                            Name = "Aabenraa maskinfabrik"
+                        },
+                        new
+                        {
+                            ManufacturerId = 3,
+                            Name = "Raspberrypi.dk"
                         });
                 });
 
@@ -170,6 +175,11 @@ namespace Datalayer.Migrations
                         new
                         {
                             ManufacturerId = 2,
+                            LocationId = 2
+                        },
+                        new
+                        {
+                            ManufacturerId = 3,
                             LocationId = 2
                         });
                 });
@@ -234,182 +244,182 @@ namespace Datalayer.Migrations
                         new
                         {
                             ProductId = 1,
-                            Description = "This product is an Awesome piece of craftsmanship",
+                            Description = "This product is 27% better then the original",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product5182",
-                            Price = 0.91614782899438774
+                            Name = "Raspberry pi 51",
+                            Price = 0.064442106086966627
                         },
                         new
                         {
                             ProductId = 2,
-                            Description = "This product is an Awesome piece of craftsmanship",
+                            Description = "This product is 55% better then the original",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product7152",
-                            Price = 0.11738257488113948
+                            Name = "Raspberry pi 49",
+                            Price = 0.19485148703439695
                         },
                         new
                         {
                             ProductId = 3,
-                            Description = "This product is an Awesome piece of craftsmanship",
+                            Description = "This product is 74% better then the original",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product5693",
-                            Price = 0.92056960748535099
+                            Name = "Raspberry pi 44",
+                            Price = 0.6008433716375583
                         },
                         new
                         {
                             ProductId = 4,
-                            Description = "This product is an Awesome piece of craftsmanship",
+                            Description = "This product is 33% better then the original",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product6001",
-                            Price = 0.16037584895285584
+                            Name = "Raspberry pi 88",
+                            Price = 0.1613166752091221
                         },
                         new
                         {
                             ProductId = 5,
-                            Description = "This product is an Awesome piece of craftsmanship",
+                            Description = "This product is 19% better then the original",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product3151",
-                            Price = 0.82966394342000782
+                            Name = "Raspberry pi 9",
+                            Price = 0.48301145456871553
                         },
                         new
                         {
                             ProductId = 6,
-                            Description = "This product is an Awesome piece of craftsmanship",
+                            Description = "This product is 42% better then the original",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product3190",
-                            Price = 0.3645309570080279
+                            Name = "Raspberry pi 12",
+                            Price = 0.95120598746054152
                         },
                         new
                         {
                             ProductId = 7,
-                            Description = "This product is an Awesome piece of craftsmanship",
+                            Description = "This product is 23% better then the original",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product8297",
-                            Price = 0.64483075665534972
+                            Name = "Raspberry pi 77",
+                            Price = 0.43558739797938029
                         },
                         new
                         {
                             ProductId = 8,
-                            Description = "This product is an Awesome piece of craftsmanship",
+                            Description = "This product is 39% better then the original",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product8913",
-                            Price = 0.3670397486384212
+                            Name = "Raspberry pi 50",
+                            Price = 0.16150921590696518
                         },
                         new
                         {
                             ProductId = 9,
-                            Description = "This product is an Awesome piece of craftsmanship",
+                            Description = "This product is 64% better then the original",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product6578",
-                            Price = 0.47091319992715175
+                            Name = "Raspberry pi 15",
+                            Price = 0.20476716067863962
                         },
                         new
                         {
                             ProductId = 10,
-                            Description = "This product is an Awesome piece of craftsmanship",
+                            Description = "This product is 70% better then the original",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product5579",
-                            Price = 0.59967039460300953
+                            Name = "Raspberry pi 24",
+                            Price = 0.65246497125013958
                         },
                         new
                         {
                             ProductId = 11,
-                            Description = "This product is an Awesome piece of craftsmanship",
+                            Description = "This product is 16% better then the original",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product8583",
-                            Price = 0.44632559849243869
+                            Name = "Raspberry pi 99",
+                            Price = 0.12596092285865962
                         },
                         new
                         {
                             ProductId = 12,
-                            Description = "This product is an Awesome piece of craftsmanship",
+                            Description = "This product is 89% better then the original",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product6467",
-                            Price = 0.60020305057997025
+                            Name = "Raspberry pi 92",
+                            Price = 0.9797203410322407
                         },
                         new
                         {
                             ProductId = 13,
-                            Description = "This product is an Awesome piece of craftsmanship",
+                            Description = "This product is 91% better then the original",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product8471",
-                            Price = 0.36230171768101943
+                            Name = "Raspberry pi 67",
+                            Price = 0.63951263466827224
                         },
                         new
                         {
                             ProductId = 14,
-                            Description = "This product is an Awesome piece of craftsmanship",
+                            Description = "This product is 35% better then the original",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product4473",
-                            Price = 0.67273645553399641
+                            Name = "Raspberry pi 93",
+                            Price = 0.090230986983622891
                         },
                         new
                         {
                             ProductId = 15,
-                            Description = "This product is an Awesome piece of craftsmanship",
+                            Description = "This product is 64% better then the original",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product3103",
-                            Price = 0.27191660193350009
+                            Name = "Raspberry pi 5",
+                            Price = 0.26485338120947283
                         },
                         new
                         {
                             ProductId = 16,
-                            Description = "This product is an Awesome piece of craftsmanship",
+                            Description = "This product is 64% better then the original",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product6495",
-                            Price = 0.89286698628816152
+                            Name = "Raspberry pi 64",
+                            Price = 0.052567358618866356
                         },
                         new
                         {
                             ProductId = 17,
-                            Description = "This product is an Awesome piece of craftsmanship",
+                            Description = "This product is 84% better then the original",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product6035",
-                            Price = 0.73443883924486064
+                            Name = "Raspberry pi 68",
+                            Price = 0.24547895428048397
                         },
                         new
                         {
                             ProductId = 18,
-                            Description = "This product is an Awesome piece of craftsmanship",
+                            Description = "This product is 92% better then the original",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product6787",
-                            Price = 0.006543357393957375
+                            Name = "Raspberry pi 62",
+                            Price = 0.38221089978805317
                         },
                         new
                         {
                             ProductId = 19,
-                            Description = "This product is an Awesome piece of craftsmanship",
+                            Description = "This product is 56% better then the original",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product2022",
-                            Price = 0.58759427982736112
+                            Name = "Raspberry pi 70",
+                            Price = 0.95362494371534556
                         },
                         new
                         {
                             ProductId = 20,
-                            Description = "This product is an Awesome piece of craftsmanship",
+                            Description = "This product is 10% better then the original",
                             Hidden = false,
                             ManufacturerId = 1,
-                            Name = "Product5941",
-                            Price = 0.25120682653561555
+                            Name = "Raspberry pi 17",
+                            Price = 0.88460101414686121
                         });
                 });
 
@@ -439,141 +449,218 @@ namespace Datalayer.Migrations
                         new
                         {
                             ProductImageId = 1,
-                            ImageName = "Image",
-                            ImagePath = "Image.png",
+                            ImageName = "Pi70",
+                            ImagePath = "Pi7.jpg",
                             ProductId = 1
                         },
                         new
                         {
                             ProductImageId = 2,
-                            ImageName = "Image",
-                            ImagePath = "Image.png",
-                            ProductId = 2
+                            ImageName = "Pi58",
+                            ImagePath = "Pi1.jpg",
+                            ProductId = 1
                         },
                         new
                         {
                             ProductImageId = 3,
-                            ImageName = "Image",
-                            ImagePath = "Image.png",
-                            ProductId = 3
+                            ImageName = "Pi43",
+                            ImagePath = "Pi2.jpg",
+                            ProductId = 2
                         },
                         new
                         {
                             ProductImageId = 4,
-                            ImageName = "Image",
-                            ImagePath = "Image.png",
-                            ProductId = 4
+                            ImageName = "Pi72",
+                            ImagePath = "Pi5.jpg",
+                            ProductId = 2
                         },
                         new
                         {
                             ProductImageId = 5,
-                            ImageName = "Image",
-                            ImagePath = "Image.png",
-                            ProductId = 5
+                            ImageName = "Pi16",
+                            ImagePath = "Pi5.jpg",
+                            ProductId = 3
                         },
                         new
                         {
                             ProductImageId = 6,
-                            ImageName = "Image",
-                            ImagePath = "Image.png",
-                            ProductId = 6
+                            ImageName = "Pi23",
+                            ImagePath = "Pi1.jpg",
+                            ProductId = 4
                         },
                         new
                         {
                             ProductImageId = 7,
-                            ImageName = "Image",
-                            ImagePath = "Image.png",
-                            ProductId = 7
+                            ImageName = "Pi46",
+                            ImagePath = "Pi2.jpg",
+                            ProductId = 5
                         },
                         new
                         {
                             ProductImageId = 8,
-                            ImageName = "Image",
-                            ImagePath = "Image.png",
-                            ProductId = 8
+                            ImageName = "Pi9",
+                            ImagePath = "Pi4.jpg",
+                            ProductId = 6
                         },
                         new
                         {
                             ProductImageId = 9,
-                            ImageName = "Image",
-                            ImagePath = "Image.png",
-                            ProductId = 9
+                            ImageName = "Pi36",
+                            ImagePath = "Pi6.jpg",
+                            ProductId = 7
                         },
                         new
                         {
                             ProductImageId = 10,
-                            ImageName = "Image",
-                            ImagePath = "Image.png",
-                            ProductId = 10
+                            ImageName = "Pi91",
+                            ImagePath = "Pi7.jpg",
+                            ProductId = 7
                         },
                         new
                         {
                             ProductImageId = 11,
-                            ImageName = "Image",
-                            ImagePath = "Image.png",
-                            ProductId = 11
+                            ImageName = "Pi38",
+                            ImagePath = "Pi7.jpg",
+                            ProductId = 8
                         },
                         new
                         {
                             ProductImageId = 12,
-                            ImageName = "Image",
-                            ImagePath = "Image.png",
-                            ProductId = 12
+                            ImageName = "Pi92",
+                            ImagePath = "Pi7.jpg",
+                            ProductId = 8
                         },
                         new
                         {
                             ProductImageId = 13,
-                            ImageName = "Image",
-                            ImagePath = "Image.png",
-                            ProductId = 13
+                            ImageName = "Pi61",
+                            ImagePath = "Pi3.jpg",
+                            ProductId = 9
                         },
                         new
                         {
                             ProductImageId = 14,
-                            ImageName = "Image",
-                            ImagePath = "Image.png",
-                            ProductId = 14
+                            ImageName = "Pi71",
+                            ImagePath = "Pi7.jpg",
+                            ProductId = 9
                         },
                         new
                         {
                             ProductImageId = 15,
-                            ImageName = "Image",
-                            ImagePath = "Image.png",
-                            ProductId = 15
+                            ImageName = "Pi12",
+                            ImagePath = "Pi7.jpg",
+                            ProductId = 10
                         },
                         new
                         {
                             ProductImageId = 16,
-                            ImageName = "Image",
-                            ImagePath = "Image.png",
-                            ProductId = 16
+                            ImageName = "Pi62",
+                            ImagePath = "Pi5.jpg",
+                            ProductId = 11
                         },
                         new
                         {
                             ProductImageId = 17,
-                            ImageName = "Image",
-                            ImagePath = "Image.png",
-                            ProductId = 17
+                            ImageName = "Pi1",
+                            ImagePath = "Pi6.jpg",
+                            ProductId = 11
                         },
                         new
                         {
                             ProductImageId = 18,
-                            ImageName = "Image",
-                            ImagePath = "Image.png",
-                            ProductId = 18
+                            ImageName = "Pi33",
+                            ImagePath = "Pi7.jpg",
+                            ProductId = 12
                         },
                         new
                         {
                             ProductImageId = 19,
-                            ImageName = "Image",
-                            ImagePath = "Image.png",
-                            ProductId = 19
+                            ImageName = "Pi55",
+                            ImagePath = "Pi1.jpg",
+                            ProductId = 13
                         },
                         new
                         {
                             ProductImageId = 20,
-                            ImageName = "Image",
-                            ImagePath = "Image.png",
+                            ImageName = "Pi97",
+                            ImagePath = "Pi5.jpg",
+                            ProductId = 14
+                        },
+                        new
+                        {
+                            ProductImageId = 21,
+                            ImageName = "Pi45",
+                            ImagePath = "Pi3.jpg",
+                            ProductId = 14
+                        },
+                        new
+                        {
+                            ProductImageId = 22,
+                            ImageName = "Pi57",
+                            ImagePath = "Pi1.jpg",
+                            ProductId = 15
+                        },
+                        new
+                        {
+                            ProductImageId = 23,
+                            ImageName = "Pi18",
+                            ImagePath = "Pi4.jpg",
+                            ProductId = 15
+                        },
+                        new
+                        {
+                            ProductImageId = 24,
+                            ImageName = "Pi85",
+                            ImagePath = "Pi7.jpg",
+                            ProductId = 16
+                        },
+                        new
+                        {
+                            ProductImageId = 25,
+                            ImageName = "Pi70",
+                            ImagePath = "Pi2.jpg",
+                            ProductId = 16
+                        },
+                        new
+                        {
+                            ProductImageId = 26,
+                            ImageName = "Pi98",
+                            ImagePath = "Pi1.jpg",
+                            ProductId = 17
+                        },
+                        new
+                        {
+                            ProductImageId = 27,
+                            ImageName = "Pi30",
+                            ImagePath = "Pi4.jpg",
+                            ProductId = 17
+                        },
+                        new
+                        {
+                            ProductImageId = 28,
+                            ImageName = "Pi34",
+                            ImagePath = "Pi2.jpg",
+                            ProductId = 18
+                        },
+                        new
+                        {
+                            ProductImageId = 29,
+                            ImageName = "Pi47",
+                            ImagePath = "Pi6.jpg",
+                            ProductId = 19
+                        },
+                        new
+                        {
+                            ProductImageId = 30,
+                            ImageName = "Pi36",
+                            ImagePath = "Pi7.jpg",
+                            ProductId = 19
+                        },
+                        new
+                        {
+                            ProductImageId = 31,
+                            ImageName = "Pi66",
+                            ImagePath = "Pi7.jpg",
                             ProductId = 20
                         });
                 });
@@ -599,7 +686,7 @@ namespace Datalayer.Migrations
                         new
                         {
                             OrderId = 1,
-                            ProductId = 13,
+                            ProductId = 16,
                             Amount = 0
                         });
                 });
