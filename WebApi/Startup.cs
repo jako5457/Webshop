@@ -40,6 +40,8 @@ namespace WebApi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebApi", Version = "v1" });
             });
 
+            services.AddRazorPages();
+
             //SMTP
             services.AddScoped(prov => new SmtpClient("127.0.0.1",25));
 
@@ -62,6 +64,10 @@ namespace WebApi
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApi v1"));
             }
 
+            app.UseBlazorFrameworkFiles(); // Sørger for at blazor webassembly appen kan loade de frameworks (DLL) den skal bruge for at køre i browseren 
+
+            app.UseStaticFiles(); //loader statiske filer fx billeder fra serveren
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -70,7 +76,9 @@ namespace WebApi
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapRazorPages();
                 endpoints.MapControllers();
+                endpoints.MapFallbackToFile("index.html");  // setter default endpoint til index.html
             });
         }
     }
