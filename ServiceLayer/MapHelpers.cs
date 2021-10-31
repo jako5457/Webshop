@@ -20,7 +20,9 @@ namespace ServiceLayer
                            Name = p.Name,
                            Description = p.Description,
                            ManufacturerName = p.Manufacturer.Name,
-                           Price = p.Price
+                           Price = p.Price,
+                           ProductImages = p.ProductImages.Count(),
+                           ManufacturerId = p.ManufacturerId
                        });
         }
 

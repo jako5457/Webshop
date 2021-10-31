@@ -1,0 +1,45 @@
+﻿@inject NavigationManager Nav
+
+<div class="card">
+    <img class="card-img-top" src="@( Nav.BaseUri + "api/image/" + ProductId + "/" + SelectedImage)" alt="Card image cap">
+    <div class="card-body">
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" @onclick="next" class="btn btn-secondary"><i class="fas fa-angle-left"></i></button>
+            <button type="button" class="btn btn-secondary">Middle</button>
+            <button type="button" @onclick="Prev" class="btn btn-secondary"><i class="fas fa-angle-right"></i></button>
+        </div>
+    </div>
+</div>
+
+
+
+@code {
+    private int SelectedImage = 1;
+
+    [Parameter]
+    public int ImageCount { get; set; }
+
+    [Parameter]
+    public int ProductId { get; set; }
+
+    public void next()
+    {
+        if (SelectedImage != ImageCount)
+        {
+            SelectedImage++;
+        }
+    }
+
+    public void Prev()
+    {
+        if (SelectedImage != 1)
+        {
+            SelectedImage--;
+        }
+    }
+
+    public void Select(int imageIndex)
+    {
+        SelectedImage = imageIndex;
+    }
+}

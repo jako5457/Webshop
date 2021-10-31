@@ -129,11 +129,11 @@ namespace Datalayer
                     new Product()
                     {
                         ProductId = i,
-                        Name = $"Raspberry pi {rnd.Next(1,100)}",
-                        Description = $"This product is {rnd.Next(1,100)}% better then the original",
+                        Name = $"Raspberry pi {rnd.Next(1, 100)}",
+                        Description = $"This product is {rnd.Next(1, 100)}% better then the original",
                         Hidden = false,
                         ManufacturerId = rnd.Next(1, 2),
-                        Price = rnd.NextDouble()
+                        Price = Math.Round(rnd.NextDouble() * (1000 - 100) + 100, 2)
                     }
                 );
             }

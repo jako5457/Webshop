@@ -1,0 +1,28 @@
+﻿@page "/Product/{ProductId:int}"
+@inject HttpClient client
+
+@if (product != null)
+{
+    <div class="row">
+        <div class="col-12">
+            <h1>@product.Name</h1>
+        </div>
+    </div>
+}
+else
+{
+    <LoadingComponent Text="Loading Product...."/>
+}
+
+@code {
+    [Parameter]
+    public int ProductId { get; set; }
+
+    private ProductModel product { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        product = await client.GetFromJsonAsync<ProductModel>($"/api/product/{ProductId}");
+        await base.OnInitializedAsync();
+    }
+}

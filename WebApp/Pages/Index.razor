@@ -1,7 +1,31 @@
 ﻿@page "/"
+@inject HttpClient client
 
-<h1>Hello, world!</h1>
+<div class="row">
+    @if (Products != null)
+    {
+        @foreach (var prod in Products)
+        {
+            <div class="col-4 mt-1 mb-1">
+                <ProductItem ProductModel="prod" />
+            </div>
+        }
+    }
+    else
+    {
+        <LoadingComponent Text="Loading Products..."/>
+    }
+</div>
 
-Welcome to your new app.
+@code{
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+    private List<ProductModel> Products { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        Products = await client.GetFromJsonAsync<List<ProductModel>>("/api/product/all");
+
+        await base.OnInitializedAsync();
+    }
+
+}
