@@ -1,12 +1,23 @@
 ﻿@inject NavigationManager Nav
 
 <div class="card">
-    <img class="card-img-top" src="@( Nav.BaseUri + "api/image/" + ProductId + "/" + SelectedImage)" alt="Card image cap">
+    <img class="card-img-top ProductImage" src="@( Nav.BaseUri + "api/image/" + ProductId + "/" + SelectedImage)" alt="Card image cap">
     <div class="card-body">
         <div class="btn-group" role="group" aria-label="Basic example">
-            <button type="button" @onclick="next" class="btn btn-secondary"><i class="fas fa-angle-left"></i></button>
-            <button type="button" class="btn btn-secondary">Middle</button>
-            <button type="button" @onclick="Prev" class="btn btn-secondary"><i class="fas fa-angle-right"></i></button>
+            <button type="button" @onclick="Prev" class="btn btn-secondary"><i class="fas fa-angle-left"></i></button>
+            @for (int i = 1; i <= ImageCount; i++)
+            {
+                if (i == SelectedImage)
+                {
+                    <button type="button" class="btn btn-light border-light">@i</button>
+                }
+                else
+                {
+                    int sel = i;
+                    <button type="button" @onclick="() => Select(sel)" class="btn btn-secondary">@i</button>
+                }
+            }
+            <button type="button" @onclick="next" class="btn btn-secondary"><i class="fas fa-angle-right"></i></button>
         </div>
     </div>
 </div>
@@ -28,6 +39,7 @@
         {
             SelectedImage++;
         }
+        StateHasChanged();
     }
 
     public void Prev()
@@ -36,10 +48,12 @@
         {
             SelectedImage--;
         }
+        StateHasChanged();
     }
 
     public void Select(int imageIndex)
     {
         SelectedImage = imageIndex;
+        StateHasChanged();
     }
 }

@@ -1,0 +1,38 @@
+﻿@page "/Product/{ProductId:int}"
+@inject HttpClient client
+
+@if (product != null)
+{
+    <div class="row">
+        <div class="col-6">
+            <ImageViewer ImageCount="@(product.ProductImages)" ProductId="@product.ProductId" />
+        </div>
+        <div class="col-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h1>@product.Name</h1>
+                    <p>@product.Description</p>
+                </div>
+                <div class="card-footer"><h3>@product.Price Kr.</h3> <a href="#" class="btn btn-success"><i class="fas fa-shopping-basket"></i> Add to basket</a></div>
+            </div>
+            
+        </div>
+    </div>
+}
+else
+{
+    <LoadingComponent Text="Loading Product...."/>
+}
+
+@code {
+    [Parameter]
+    public int ProductId { get; set; }
+
+    private ProductModel product { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        product = await client.GetFromJsonAsync<ProductModel>($"/api/product/{ProductId}");
+        await base.OnInitializedAsync();
+    }
+}

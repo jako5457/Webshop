@@ -4,7 +4,7 @@
 <div class="card">
     <img class="card-img-top ProdImage" src="@( Nav.BaseUri + "api/image/" + ProductModel.ProductId + "/1")" alt="@ProductModel.Name" />
     <div class="card-body">
-        <h5 class="card-title"><button class="btn btn-link" @onclick="GotoProduct">@ProductModel.Name</button></h5>
+        <h5 class="card-title"><button class="btn btn-link p-0" @onclick="GotoProduct">@ProductModel.Name</button></h5>
         <p class="card-text">@ProductModel.Price Kr.</p>
         <a href="#" class="btn btn-success"><i class="fas fa-shopping-basket"></i> Add</a>
     </div>

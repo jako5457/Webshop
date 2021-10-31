@@ -158,6 +158,8 @@ namespace Datalayer
                 });
                 count++;
 
+                //System.Threading.Thread.Sleep(1000);
+
                 if (rnd.Next(0,100) >= 50)
                 {
                     builder.Entity<ProductImage>().HasData(new ProductImage()
