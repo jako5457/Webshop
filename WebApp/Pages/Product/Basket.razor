@@ -13,25 +13,38 @@
             <tr>
                 <th scope="col">Name</th>
                 <th scope="col">Price</th>
-                <th scope="col">Amount</th>
                 <th scope="col">Total</th>
+                <th scope="col">Amount</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var prod in ShoppingBasket)
             {
-                <tr>
-                    <th scope="row">@prod.name</th>
-                    <td>@prod.Price</td>
-                    <td>@prod.Amount</td>
-                    <td>@(prod.Price * prod.Amount)</td>
-                </tr>
+            <tr>
+                <th scope="row">@prod.name</th>
+                <td>@prod.Price Kr.</td>
+                <td>@(prod.Price * prod.Amount) kr.</td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <button type="button" @onclick="() => sub(prod.ProductId)" class="btn btn-light"><i class="fas fa-minus"></i></button>
+                        <div class="btn btn-light">@prod.Amount</div>
+                        <button type="button" @onclick="() => Add(prod.ProductId)" class="btn btn-light"><i class="fas fa-plus"></i></button>
+                    </div>
+                </td>
+
+            </tr>
             }
         </tbody>
     </table>
 }
+<hr />
+<h2>Total: @Total Kr.</h2>
 
 @code {
+
+    [CascadingParameter] public MainLayout MainLayout { get; set; }
+
+    double Total = 0;
 
     public List<BasketModel> ShoppingBasket { get; set; }
 
@@ -42,13 +55,59 @@
             string basketString = await LocalStorage.GetItemAsStringAsync("Basket");
 
             ShoppingBasket = basketString.ToBasketModels();
+
+            Total = 0;
+            foreach (var item in ShoppingBasket)
+            {
+                Total += (item.Price * item.Amount);
+            }
         }
         base.OnInitialized();
+    }
+
+    public async Task Add(int ProductId)
+    {
+        string basketString = await LocalStorage.GetItemAsStringAsync("Basket");
+
+        var basket = basketString.ToBasketModels();
+
+        var existing = basket.Where(b => b.ProductId == ProductId).FirstOrDefault();
+
+        int index = basket.IndexOf(existing);
+
+        basket[index].Amount++;
+
+        await LocalStorage.SetItemAsStringAsync("Basket", basket.ToStorageString());
+        await OnInitializedAsync();
+        await MainLayout.Update();
+    }
+
+    public async Task sub(int ProductId)
+    {
+        string basketString = await LocalStorage.GetItemAsStringAsync("Basket");
+
+        var basket = basketString.ToBasketModels();
+
+        var existing = basket.Where(b => b.ProductId == ProductId).FirstOrDefault();
+
+        int index = basket.IndexOf(existing);
+
+        basket[index].Amount--;
+
+        if (basket[index].Amount == 0)
+        {
+            basket.RemoveAt(index);
+        }
+
+        await LocalStorage.SetItemAsStringAsync("Basket", basket.ToStorageString());
+        await OnInitializedAsync();
+        await MainLayout.Update();
     }
 
     public async Task ClearBasketAsync()
     {
         await LocalStorage.SetItemAsStringAsync("Basket","");
         await OnInitializedAsync();
+        await MainLayout.Update();
     }
 }
