@@ -1,12 +1,13 @@
 ﻿@using WebApp.Models
 @inject NavigationManager Nav
+@inject ILocalStorageService LocalStorage
 
 <div class="card">
     <img class="card-img-top ProdImage" src="@( Nav.BaseUri + "api/image/" + ProductModel.ProductId + "/1")" alt="@ProductModel.Name" />
     <div class="card-body">
         <h5 class="card-title"><button class="btn btn-link p-0" @onclick="GotoProduct">@ProductModel.Name</button></h5>
         <p class="card-text">@ProductModel.Price Kr.</p>
-        <a href="#" class="btn btn-success"><i class="fas fa-shopping-basket"></i> Add</a>
+        <button @onclick="AddToBasket" class="btn btn-success"><i class="fas fa-shopping-basket"></i> Add</button>
     </div>
 </div>
 
@@ -14,8 +15,56 @@
     [Parameter]
     public ProductModel ProductModel { get; set; }
 
+    [Parameter]
+    public EventCallback<MouseEventArgs> OnAddToBasket { get; set; }
+
     public void GotoProduct()
     {
         Nav.NavigateTo($"/Product/{ProductModel.ProductId}");
     }
+
+    public async Task AddToBasket(MouseEventArgs e)
+    {
+        if (await LocalStorage.ContainKeyAsync("Basket"))
+        {
+            string basketString = await LocalStorage.GetItemAsStringAsync("Basket");
+
+            var basket = basketString.ToBasketModels();
+
+            var existing = basket.Where(b => b.ProductId == ProductModel.ProductId).FirstOrDefault();
+
+            if (existing == null)
+            {
+                basket.Add(new BasketModel() {
+                    ProductId = ProductModel.ProductId,
+                    name = ProductModel.Name,
+                    Price = ProductModel.Price
+                });
+            }
+            else
+            {
+                int index = basket.IndexOf(existing);
+
+                basket[index].Amount++;
+            }
+
+            await LocalStorage.SetItemAsStringAsync("Basket",basket.ToStorageString());
+        }
+        else
+        {
+            var basket = new List<BasketModel>();
+
+            basket.Add(new BasketModel()
+            {
+                ProductId = ProductModel.ProductId,
+                name = ProductModel.Name,
+                Price = ProductModel.Price
+            });
+
+            await LocalStorage.SetItemAsStringAsync("Basket", basket.ToStorageString());
+        }
+        StateHasChanged();
+        await OnAddToBasket.InvokeAsync(e);
+    }
+
 }

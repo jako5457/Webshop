@@ -1,6 +1,10 @@
 ﻿@page "/Basket"
-@inject ISyncLocalStorageService LocalStorage
+@inject ILocalStorageService LocalStorage
 <h3>Basket</h3>
+
+<div class="btn-group" role="group" aria-label="Basic example">
+    <button type="button" @onclick="ClearBasketAsync" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Clear basket</button>
+</div>
 
 @if (ShoppingBasket != null)
 {
@@ -14,10 +18,10 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var prod in ShoppingBasket.Products)
+            @foreach (var prod in ShoppingBasket)
             {
                 <tr>
-                    <th scope="row">@prod.Name</th>
+                    <th scope="row">@prod.name</th>
                     <td>@prod.Price</td>
                     <td>@prod.Amount</td>
                     <td>@(prod.Price * prod.Amount)</td>
@@ -29,15 +33,22 @@
 
 @code {
 
-    public BasketModel ShoppingBasket { get; set; }
+    public List<BasketModel> ShoppingBasket { get; set; }
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        @if (LocalStorage.ContainKey("Basket"))
+        @if (await LocalStorage.ContainKeyAsync("Basket"))
         {
-            ShoppingBasket = LocalStorage.GetItem<BasketModel>("Basket");
+            string basketString = await LocalStorage.GetItemAsStringAsync("Basket");
+
+            ShoppingBasket = basketString.ToBasketModels();
         }
         base.OnInitialized();
     }
 
+    public async Task ClearBasketAsync()
+    {
+        await LocalStorage.SetItemAsStringAsync("Basket","");
+        await OnInitializedAsync();
+    }
 }

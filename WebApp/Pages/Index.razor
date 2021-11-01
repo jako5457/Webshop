@@ -7,7 +7,7 @@
         @foreach (var prod in Products)
         {
             <div class="col-4 mt-1 mb-1">
-                <ProductItem ProductModel="prod" />
+                <ProductItem ProductModel="prod" OnAddToBasket="() => MainLayout.Update()" />
             </div>
         }
     }
@@ -18,6 +18,8 @@
 </div>
 
 @code{
+
+    [CascadingParameter] public MainLayout MainLayout { get; set; }
 
     private List<ProductModel> Products { get; set; }
 
