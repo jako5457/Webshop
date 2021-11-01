@@ -1,5 +1,6 @@
 ﻿@page "/Product/{ProductId:int}"
 @inject HttpClient client
+@inject ILocalStorageService LocalStorage
 
 @if (product != null)
 {
@@ -13,9 +14,8 @@
                     <h1>@product.Name</h1>
                     <p>@product.Description</p>
                 </div>
-                <div class="card-footer"><h3>@product.Price Kr.</h3> <a href="#" class="btn btn-success"><i class="fas fa-shopping-basket"></i> Add to basket</a></div>
+                <div class="card-footer"><h3>@product.Price Kr.</h3> <button class="btn btn-success"><i class="fas fa-shopping-basket"></i> Add to basket</button></div>
             </div>
-            
         </div>
     </div>
 }
@@ -35,4 +35,4 @@ else
         product = await client.GetFromJsonAsync<ProductModel>($"/api/product/{ProductId}");
         await base.OnInitializedAsync();
     }
-}
+    }
