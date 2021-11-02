@@ -48,6 +48,8 @@
 
     public List<BasketModel> ShoppingBasket { get; set; }
 
+
+
     protected override async Task OnInitializedAsync()
     {
         @if (await LocalStorage.ContainKeyAsync("Basket"))
@@ -64,6 +66,8 @@
         }
         base.OnInitialized();
     }
+
+
 
     public async Task Add(int ProductId)
     {
