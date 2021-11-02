@@ -20,5 +20,7 @@ namespace WebApp.Models
         public int ManufacturerId { get; set; }
 
         public int ProductImages { get; set; }
+
+        public int Amount { get; set; }
     }
 }

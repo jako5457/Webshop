@@ -1,5 +1,6 @@
 ﻿@page "/Basket"
 @inject ILocalStorageService LocalStorage
+@inject NavigationManager Nav
 <h3>Basket</h3>
 
 <div class="btn-group" role="group" aria-label="Basic example">
@@ -39,6 +40,7 @@
 }
 <hr />
 <h2>Total: @Total Kr.</h2>
+<button class="btn btn-lg btn-success" @onclick='() => Nav.NavigateTo("/checkout")'><i class="fas fa-cash-register"></i> Checkout</button>
 
 @code {
 

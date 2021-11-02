@@ -1,0 +1,77 @@
+﻿@page "/checkout"
+@inject ILocalStorageService LocalStorage
+@inject HttpClient Client
+@inject NavigationManager Nav
+<h3>Checkout</h3>
+
+<div class="card">
+    <div class="card-body">
+        <EditForm Model="@order" OnValidSubmit="@ValidSubmitAsync">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputFirstName">Firstname</label>
+                    <input type="text" @bind-value="order.FirstName" class="form-control" id="inputFirstName" placeholder="FirstName">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputLastName">LastName</label>
+                    <input type="text" @bind-value="order.LastName" class="form-control" id="inputLastName" placeholder="LastName">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputEmail">Email</label>
+                    <input type="email" @bind-value="order.Email" class="form-control" id="inputEmail" placeholder="Email">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputAddress">Address</label>
+                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <label for="inputZip">Zip</label>
+                    <input type="text" class="form-control" id="inputZip">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputCity">City</label>
+                    <input type="text" class="form-control" id="inputCity">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Checkout</button>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    public OrderModel order = new OrderModel();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+    }
+
+    public async Task ValidSubmitAsync()
+    {
+        OrderProductModel model = new();
+
+        string basketString = await LocalStorage.GetItemAsStringAsync("Basket");
+
+        List<BasketModel> basket = basketString.ToBasketModels();
+
+        model.Products = basket.Select(bp => new ProductModel() {
+            ProductId = bp.ProductId,
+            Name = bp.name,
+            Amount = bp.Amount,
+            Price = bp.Price
+        }).ToList();
+
+        model.Order = order;
+
+        var result = await Client.PostAsJsonAsync<OrderProductModel>("/api/Order", model);
+
+        if (result.StatusCode == System.Net.HttpStatusCode.OK)
+        {
+            Nav.NavigateTo("/Reciept");
+        }
+    }
+}
