@@ -1,6 +1,7 @@
 ﻿@using WebApp.Models
 @inject NavigationManager Nav
 @inject ILocalStorageService LocalStorage
+@inject IToastService ToastService
 
 <div class="card">
     <img class="card-img-top ProdImage" src="@( Nav.BaseUri + "api/image/" + ProductModel.ProductId + "/1")" alt="@ProductModel.Name" />
@@ -35,7 +36,8 @@
 
             if (existing == null)
             {
-                basket.Add(new BasketModel() {
+                basket.Add(new BasketModel()
+                {
                     ProductId = ProductModel.ProductId,
                     name = ProductModel.Name,
                     Price = ProductModel.Price
@@ -48,7 +50,7 @@
                 basket[index].Amount++;
             }
 
-            await LocalStorage.SetItemAsStringAsync("Basket",basket.ToStorageString());
+            await LocalStorage.SetItemAsStringAsync("Basket", basket.ToStorageString());
         }
         else
         {
@@ -64,6 +66,7 @@
             await LocalStorage.SetItemAsStringAsync("Basket", basket.ToStorageString());
         }
         StateHasChanged();
+        ToastService.ShowSuccess($"Added {ProductModel.Name} to your basket");
         await OnAddToBasket.InvokeAsync(e);
     }
 

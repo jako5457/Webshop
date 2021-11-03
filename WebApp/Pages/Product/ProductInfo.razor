@@ -1,6 +1,7 @@
 ﻿@page "/Product/{ProductId:int}"
 @inject HttpClient client
 @inject ILocalStorageService LocalStorage
+@inject IToastService ToastService
 
 @if (product != null)
 {
@@ -66,6 +67,8 @@ else
             }
 
             await LocalStorage.SetItemAsStringAsync("Basket", basket.ToStorageString());
+
+            ToastService.ShowSuccess($"Added {product.Name} to your basket");
         }
         else
         {

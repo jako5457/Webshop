@@ -1,5 +1,6 @@
 ﻿@page "/"
 @inject HttpClient client
+@inject IToastService ToastService
 
 <div class="row">
     @if (Products != null)
@@ -25,7 +26,14 @@
 
     protected async override Task OnInitializedAsync()
     {
-        Products = await client.GetFromJsonAsync<List<ProductModel>>("/api/product/all");
+        try
+        {
+            Products = await client.GetFromJsonAsync<List<ProductModel>>("/api/product/all");
+        }
+        catch (Exception e)
+        {
+            ToastService.ShowError(e.Message);
+        }
 
         await base.OnInitializedAsync();
     }
