@@ -37,7 +37,7 @@
     public string ErrorMessage { get; set; }
 
     private ProductValidationForm form { get; set; } = new();
-    private EditContext EditContext;
+    private EditContext EditContext = new(new ProductValidationForm());
 
     protected override async Task OnInitializedAsync()
     {

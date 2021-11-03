@@ -1,8 +1,11 @@
 ﻿@page "/checkout"
 @inject ILocalStorageService LocalStorage
 @inject HttpClient Client
+@inject IHttpClientFactory httpClientFactory
 @inject NavigationManager Nav
 <h3>Checkout</h3>
+
+<p>@ErrorMsg</p>
 
 <div class="card">
     <div class="card-body">
@@ -30,11 +33,11 @@
             <div class="form-row">
                 <div class="form-group col-md-2">
                     <label for="inputZip">Zip</label>
-                    <input type="text" class="form-control" id="inputZip">
+                    <input type="text" @oninput="OnZipInput" @bind="zipcode" class="form-control" id="inputZip">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputCity">City</label>
-                    <input type="text" class="form-control" id="inputCity">
+                    <input type="text" disabled @bind="city" class="form-control" id="inputCity">
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Checkout</button>
@@ -43,7 +46,12 @@
 </div>
 
 @code {
+    [CascadingParameter] MainLayout MainLayout { get; set; }
     public OrderModel order = new OrderModel();
+
+    public string ErrorMsg { get; set; }
+    public string zipcode { get; set; }
+    public string city { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -98,9 +106,49 @@
 
         var result = await Client.PostAsJsonAsync<OrderProductModel>("/api/Order", model);
 
-        if (result.StatusCode == System.Net.HttpStatusCode.OK)
+        if (result.IsSuccessStatusCode)
         {
+            await LocalStorage.SetItemAsStringAsync("Basket", "");
+            await MainLayout.Update();
             Nav.NavigateTo("/Reciept");
         }
     }
+
+    public async Task OnZipInput(ChangeEventArgs e)
+    {
+        HttpClient client = httpClientFactory.CreateClient("DAWA");
+
+        try
+        {
+            var results = await client.GetFromJsonAsync<AddressResult[]>($"/adresser?postnr={e.Value}&per_side=1&side=1&struktur=mini");
+
+            if (results != null)
+            {
+                if (results.Length != 0)
+                {
+                    var firstres = results.FirstOrDefault();
+
+                    city = firstres.Postnrnavn;
+                    StateHasChanged();
+                }
+                else
+                {
+                    city = "";
+                }
+            }
+            else
+            {
+                city = "";
+            }
+        }
+        catch (Exception err)
+        {
+            city = "";
+            // ErrorMsg = err.Message;
+        }
+
+
+    }
+
+
 }
