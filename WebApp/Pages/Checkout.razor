@@ -67,6 +67,35 @@
 
         model.Order = order;
 
+        CustomerModel customer = null;
+
+        try
+        {
+            customer = await Client.GetFromJsonAsync<CustomerModel>($"/api/Customer/email/{order.Email}");
+        }
+        catch (Exception e)
+        {
+            //do not fail if customer is not there
+        };
+
+        if (customer == null)
+        {
+            customer = new()
+            {
+                firstName = order.FirstName,
+                lastName = order.LastName,
+                email = order.Email
+            };
+            var CustomerCreateResult = await Client.PostAsJsonAsync<CustomerModel>("/api/Customer",customer);
+
+            if (CustomerCreateResult.IsSuccessStatusCode)
+            {
+                customer = await Client.GetFromJsonAsync<CustomerModel>($"/api/Customer/email/{order.Email}");
+            }
+        }
+
+        model.Order.CustomerId = customer.customerId;
+
         var result = await Client.PostAsJsonAsync<OrderProductModel>("/api/Order", model);
 
         if (result.StatusCode == System.Net.HttpStatusCode.OK)
