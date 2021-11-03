@@ -1,5 +1,6 @@
 ﻿@page "/product/edit/{ProductId:int}"
 @inject NavigationManager Nav
+@inject IToastService ToastService
 <h3>EditProduct</h3>
 
 <EditForm EditContext="@EditContext" OnValidSubmit="@OnValidSubmit">
@@ -55,13 +56,14 @@
     {
         var response = await client.PutAsJsonAsync<ProductValidationForm>("/api/Product", form);
 
-        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+        if (response.IsSuccessStatusCode)
         {
+            ToastService.ShowSuccess($"Product changed.");
             Nav.NavigateTo("/");
         }
         else
         {
-            ErrorMessage = $"{response.StatusCode} : {response.ReasonPhrase}";
+            ToastService.ShowError($"{response.StatusCode} : {response.ReasonPhrase}");
         }
     }
 

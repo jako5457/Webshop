@@ -1,6 +1,7 @@
 ﻿@page "/Basket"
 @inject ILocalStorageService LocalStorage
 @inject NavigationManager Nav
+@inject IToastService ToastService
 <h3>Basket</h3>
 
 <div class="btn-group" role="group" aria-label="Basic example">
@@ -40,7 +41,7 @@
 }
 <hr />
 <h2>Total: @Total Kr.</h2>
-<button class="btn btn-lg btn-success" @onclick='() => Nav.NavigateTo("/checkout")'><i class="fas fa-cash-register"></i> Checkout</button>
+<button class="btn btn-lg btn-success" @onclick='Oncheckout'><i class="fas fa-cash-register"></i> Checkout</button>
 
 @code {
 
@@ -49,8 +50,6 @@
     double Total = 0;
 
     public List<BasketModel> ShoppingBasket { get; set; }
-
-
 
     protected override async Task OnInitializedAsync()
     {
@@ -69,7 +68,20 @@
         base.OnInitialized();
     }
 
+    public void Oncheckout()
+    {
 
+        if (ShoppingBasket.Count != 0)
+        {
+            Nav.NavigateTo("/checkout");
+        }
+        else
+        {
+            ToastService.ShowInfo("Your basket is empty");
+        }
+
+
+    }
 
     public async Task Add(int ProductId)
     {
@@ -113,6 +125,9 @@
     public async Task ClearBasketAsync()
     {
         await LocalStorage.SetItemAsStringAsync("Basket","");
+
+        ToastService.ShowSuccess("Basket has been cleared.");
+
         await OnInitializedAsync();
         await MainLayout.Update();
     }

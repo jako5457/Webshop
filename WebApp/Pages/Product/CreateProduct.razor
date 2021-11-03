@@ -2,9 +2,8 @@
 @using System.ComponentModel.DataAnnotations;
 @inject HttpClient Client
 @inject NavigationManager Nav
+@inject IToastService ToastService
 <h3>Create Product</h3>
-
-<p>@ErrorMessage</p>
 
 <EditForm Model="@form" OnValidSubmit="@OnValidSubmit">
     <DataAnnotationsValidator />
@@ -42,13 +41,14 @@
     {
         var response = await Client.PostAsJsonAsync<ProductValidationForm>("/api/Product/create",form);
 
-        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+        if (response.IsSuccessStatusCode)
         {
+            ToastService.ShowSuccess("Product created");
             Nav.NavigateTo("/");
         }
         else
         {
-            ErrorMessage = $"{response.StatusCode} : {response.ReasonPhrase}";
+            ToastService.ShowError($"{response.StatusCode} : {response.ReasonPhrase}");
         }
     }
 }

@@ -3,6 +3,7 @@
 @inject HttpClient Client
 @inject IHttpClientFactory httpClientFactory
 @inject NavigationManager Nav
+@inject IToastService ToastService
 <h3>Checkout</h3>
 
 <p>@ErrorMsg</p>
@@ -110,7 +111,12 @@
         {
             await LocalStorage.SetItemAsStringAsync("Basket", "");
             await MainLayout.Update();
+            ToastService.ShowSuccess("Your order has been placed.");
             Nav.NavigateTo("/Reciept");
+        }
+        else
+        {
+            ToastService.ShowError(result.ReasonPhrase);
         }
     }
 

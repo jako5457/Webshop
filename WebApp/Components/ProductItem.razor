@@ -67,7 +67,9 @@
             await LocalStorage.SetItemAsStringAsync("Basket", basket.ToStorageString());
         }
         StateHasChanged();
+
         ToastService.ShowSuccess($"Added {ProductModel.Name} to your basket");
+
         await OnAddToBasket.InvokeAsync(e);
     }
 
