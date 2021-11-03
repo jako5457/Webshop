@@ -1,0 +1,69 @@
+﻿@page "/product/edit/{ProductId:int}"
+@inject NavigationManager Nav
+<h3>EditProduct</h3>
+
+<EditForm EditContext="@EditContext" OnValidSubmit="@OnValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label for="InputName">Product Name</label>
+        <input type="text" @bind-value="form.Name" class="form-control" id="InputName" placeholder="Enter Name">
+    </div>
+
+    <div class="form-group">
+        <label for="InputName">Product Description</label>
+        <input type="text" @bind-value="form.Description" class="form-control" id="InputName" placeholder="Enter Desctiption">
+    </div>
+
+    <div class="form-group">
+        <label for="InputName">Product Price</label>
+        <input type="number" @bind-value="form.Price" class="form-control" id="InputName" placeholder="Enter Desctiption">
+    </div>
+
+    <div class="form-group">
+        <label for="InputName">Manufacurer Id</label>
+        <input type="number" @bind-value="form.ManufacturerId" class="form-control" id="InputName" placeholder="Enter Desctiption">
+    </div>
+
+    <button type="submit" class="btn btn-success">Edit</button>
+</EditForm>
+
+@code {
+    [Inject] private HttpClient client { get; set; }
+
+    [Parameter] public int ProductId { get; set; }
+
+    public string ErrorMessage { get; set; }
+
+    private ProductValidationForm form { get; set; } = new();
+    private EditContext EditContext = new(new ProductValidationForm());
+
+    protected override async Task OnInitializedAsync()
+    {
+        var product = await client.GetFromJsonAsync<ProductModel>($"/api/product/{ProductId}");
+        await base.OnInitializedAsync();
+        form.ProductId = ProductId;
+        form.Name = product.Name;
+        form.Description = product.Description;
+        form.Price = product.Price;
+        form.ManufacturerId = product.ManufacturerId;
+        EditContext = new(form);
+    }
+
+    public async Task OnValidSubmit()
+    {
+        var response = await client.PutAsJsonAsync<ProductValidationForm>("/api/Product", form);
+
+        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+        {
+            Nav.NavigateTo("/");
+        }
+        else
+        {
+            ErrorMessage = $"{response.StatusCode} : {response.ReasonPhrase}";
+        }
+    }
+
+
+}

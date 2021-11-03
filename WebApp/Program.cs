@@ -19,7 +19,21 @@ namespace WebApp
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("#app");
 
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+            builder.Services.AddHttpClient("localapi", client =>
+            {
+                client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);
+            });
+
+            builder.Services.AddHttpClient("DAWA", client =>
+            {
+                client.BaseAddress = new Uri("https://api.dataforsyningen.dk");
+            });
+
+            //bagud compatibilitet med Httpclient
+            builder.Services.AddScoped<HttpClient>(sp => {
+                IHttpClientFactory factory = sp.GetRequiredService<IHttpClientFactory>();
+                return factory.CreateClient("localapi"); 
+            });
 
             builder.Services.AddBlazoredLocalStorage();
             builder.Services.AddBlazoredToast();

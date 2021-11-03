@@ -29,18 +29,26 @@ namespace WebApi.Controllers
         [Route("{productId}/{imagenumber}")]
         public async Task<IActionResult> GetProductImage(int productId,int imagenumber)
         {
-
-            var imagedto = await _productService.GetProductImageAsync(productId, imagenumber);
-
-            string path = Path.Combine(_enviroment.ContentRootPath, "wwwroot", "images", "NoImage.png");
-
-            if (imagedto != null)
+            try
             {
-                path = Path.Combine(_enviroment.ContentRootPath, "wwwroot", "images", imagedto.ImagePath);
-            }
+                var imagedto = await _productService.GetProductImageAsync(productId, imagenumber);
 
-            var image = System.IO.File.OpenRead(path);
-            return File(image, "image/jpeg");
+                string path = Path.Combine(_enviroment.ContentRootPath, "wwwroot", "images", "NoImage.png");
+
+                if (imagedto != null)
+                {
+                    path = Path.Combine(_enviroment.ContentRootPath, "wwwroot", "images", imagedto.ImagePath);
+                }
+
+                var image = System.IO.File.OpenRead(path);
+                return File(image, "image/jpeg");
+            }
+            catch (Exception)
+            {
+               string path = Path.Combine(_enviroment.ContentRootPath, "wwwroot", "images","NoImage.png");
+               var image = System.IO.File.OpenRead(path);
+               return File(image, "image/jpeg");
+            }
         }
 
     }
