@@ -15,13 +15,15 @@
             <button class="btn btn-success" @onclick='() => Nav.NavigateTo("/basket")'>@BasketCount <i class="fas fa-shopping-basket"></i></button>
         </div>
 
-        <BlazoredToasts Position="ToastPosition.TopRight"
+        <BlazoredToasts Position="ToastPosition.TopCenter"
                         Timeout="3"
                         IconType="IconType.FontAwesome"
                         ErrorIcon="fas fa-times-circle"
                         InfoIcon="fas fa-info"
                         SuccessIcon="fas fa-check"
-                        WarningIcon="fas fa-exclamation-triangle" />
+                        WarningIcon="fas fa-exclamation-triangle"
+                        ShowProgressBar="true"
+                        MaxToastCount="4"/>
 
         <div class="content px-4">
             <CascadingValue Value="this">
