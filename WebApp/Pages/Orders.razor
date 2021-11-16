@@ -1,27 +1,41 @@
 ﻿@page "/Orders"
+<PageTitle>Orders</PageTitle>
+
+@inject IHttpClientFactory _HttpClientFactory;
+
 <h3>Orders</h3>
 
 <table class="table">
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Manufacturer</th>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>Totalprice</th>
         </tr>
     </thead>
     <tbody>
-@*        @foreach(var product in )
+        @foreach(var order in OrderList)
         {
             <tr>
-                <td>@product.Name</td>
-                <td>@product.Price</td>
-                <td>@product.ManufacturerName</td>
+                <td>@order.FirstName</td>
+                <td>@order.LastName</td>
+                <td>@order.TotalPrice</td>
             </tr>
-        }*@
+        }
        
     </tbody>
 </table>
 
 @code {
+    List<OrderModel> OrderList = new();
+
+    protected async override Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+
+        HttpClient client = _HttpClientFactory.CreateClient("Local");
+
+        OrderList = await client.GetFromJsonAsync<List<OrderModel>>("order/all");
+    }
 
 }
