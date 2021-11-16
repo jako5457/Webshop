@@ -1,0 +1,41 @@
+﻿@page "/"
+<PageTitle>Produkter</PageTitle>
+
+@inject IHttpClientFactory ClientFactory;
+
+<h1>Produkter</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Manufacturer</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var product in Products)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.Price</td>
+                <td>@product.ManufacturerName</td>
+            </tr>
+        }
+       
+    </tbody>
+</table>
+
+@code{
+    List<ProductModel> Products = new();
+
+    protected async override Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        HttpClient client = ClientFactory.CreateClient("Local");
+
+        Products = await client.GetFromJsonAsync<List<ProductModel>>("product/all");
+
+
+    }
+}
